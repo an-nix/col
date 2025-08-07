@@ -27,4 +27,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: yourdockerhubusername/code-server-node20:latest
+        tags: antnic/code-server-node20:latest
