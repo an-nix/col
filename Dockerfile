@@ -10,18 +10,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs git \
     && node -v && npm -v
 
-# Clone the freesewing repository
-RUN git clone https://codeberg.org/an-nix/freesewing.git /freesewing \
-    && chown -R coder:coder /freesewing
-
-# Set working directory
-WORKDIR /freesewing
-
-# Switch back to code-server user
+RUN mkdir -p /freesewing && chown coder:coder /freesewing
 USER coder
-
-# Install dependencies and run kickstart
-RUN npm install --verbose
+WORKDIR /freesewing
 
 # Expose default port
 EXPOSE 8080
