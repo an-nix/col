@@ -1,15 +1,17 @@
-# Base image with code-server
+# Base image
 FROM codercom/code-server:latest
 
-# Install Node.js 20 using NodeSource
+# Switch to root to install packages
+USER root
+
+# Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get update \
     && apt-get install -y nodejs \
     && node -v && npm -v
 
-# Optional: install global npm packages
-# RUN npm install -g yarn pnpm
+# Switch back to code-server user
+USER coder
 
-# Expose default code-server port
+# Expose default port
 EXPOSE 8080
-
-# Entrypoint is already defined by base image
