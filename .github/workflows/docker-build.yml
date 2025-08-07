@@ -22,10 +22,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push multi-arch image
+    - name: Build and push multi-arch image with cache
       uses: docker/build-push-action@v4
       with:
         context: .
         push: true
         platforms: linux/amd64,linux/arm64
-        tags: antnic/code-server-node20:latest
+        tags: |
+          antnic/code-server-node20:latest
+        cache-from: type=registry,ref=antnic/code-server-node20:cache
+        cache-to: type=registry,ref=antnic/code-server-node20:cache,mode=max
