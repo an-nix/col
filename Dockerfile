@@ -21,7 +21,7 @@ WORKDIR /freesewing
 USER coder
 
 # Install dependencies and run kickstart
-RUN npm run kickstart
+RUN npm install
 
 # Expose default port
 EXPOSE 8080
