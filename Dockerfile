@@ -22,6 +22,14 @@ RUN apt-get update && apt-get install -y \
     patch \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apT-get update && apr-get install -y \
+    debhelper-compat \
+    cpio \
+    kmod \
+    libelf-dev \
+    rsync
+
+
 # Set the working directory
 WORKDIR /build
 
