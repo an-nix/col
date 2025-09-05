@@ -1,6 +1,7 @@
 # Use a base image that is the latest stable Debian release, Trixie
 FROM debian:trixie
 
+ENV DEBIAN_FRONTEND=noninteractive
 # Set environment variables for the cross-compilation toolchain
 ENV ARCH=arm64
 ENV CROSS_COMPILE=aarch64-linux-gnu-
