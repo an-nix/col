@@ -1,7 +1,6 @@
 # Use a base image that is the latest stable Debian release, Trixie
 FROM debian:trixie
 
-ENV DEBIAN_FRONTEND=noninteractive
 # Set environment variables for the cross-compilation toolchain
 ENV ARCH=arm64
 ENV CROSS_COMPILE=aarch64-linux-gnu-
@@ -13,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     gcc-aarch64-linux-gnu \
     bc \
     bison \
+    dpkg-dev\
     flex \
     libssl-dev \
     libncurses-dev \
