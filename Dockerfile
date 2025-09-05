@@ -1,21 +1,27 @@
-# Base image
-FROM codercom/code-server:latest
+# Use a base image that is the latest stable Debian release, Trixie
+FROM debian:trixie
 
-# Switch to root to install packages
-USER root
+# Set environment variables for the cross-compilation toolchain
+ENV ARCH=arm64
+ENV CROSS_COMPILE=aarch64-linux-gnu-
 
-# Install Node.js 20 and Git
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get update \
-    && apt-get install -y nodejs git \
-    && node -v && npm -v
+# Install essential build tools and dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    make \
+    gcc-aarch64-linux-gnu \
+    bc \
+    bison \
+    flex \
+    libssl-dev \
+    libncurses-dev \
+    xz-utils \
+    wget \
+    patch \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /freesewing && chown coder:coder /freesewing
-USER coder
-WORKDIR /freesewing
+# Set the working directory
+WORKDIR /build
 
-# Expose default port
-EXPOSE 8080
-
-# Start code-server with /freesewing as the default folder
-CMD ["code-server", "/freesewing"]
+# The rest of the kernel build process will be performed in a separate script
+# or by the user running commands in the container.
