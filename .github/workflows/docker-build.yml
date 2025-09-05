@@ -29,6 +29,6 @@ jobs:
         push: true
         platforms: linux/amd64,linux/arm64
         tags: |
-          antnic/code-server-node20:latest
-        cache-from: type=registry,ref=antnic/code-server-node20:cache
-        cache-to: type=registry,ref=antnic/code-server-node20:cache,mode=max
+          antnic/arm64-cross:latest
+        cache-from: type=registry,ref=antnic/arm64-cross:cache
+        cache-to: type=registry,ref=antnic/arm64-cross:cache,mode=max
